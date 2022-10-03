@@ -15,10 +15,16 @@ const App = () => {
             return prevPersons.concat(newPerson)
         })
     }
+
+    const deleteItemHandler = (personId: number) => {
+        setPersons(prevPersons => {
+            return prevPersons.filter(item => item.id !== personId)
+        })
+    }
     return (
-        <div>
+        <div className='mx-48 my-16'>
             <NewTodo onAddNewTodo={addNewTodoHandler} />
-            <Todos items={persons} />
+            <Todos onDelete={deleteItemHandler} items={persons} />
         </div>
     )
 }
