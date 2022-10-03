@@ -1,8 +1,10 @@
 import { useRef } from 'react'
+import TodoContext from '../store/todo-context'
+import { useContext } from 'react'
 
-const NewTodo: React.FC<{
-    onAddNewTodo: (name: string, age: number) => void
-}> = props => {
+const NewTodo: React.FC = props => {
+    const todoCtx = useContext(TodoContext)
+
     const nameRef = useRef<HTMLInputElement>(null)
     const ageRef = useRef<HTMLInputElement>(null)
 
@@ -12,7 +14,8 @@ const NewTodo: React.FC<{
         const name = nameRef.current!.value
         const age = ageRef.current!.value
 
-        props.onAddNewTodo(name, +age)
+        console.log('submitHandler', name, age)
+        todoCtx.addTodo(name, +age)
     }
 
     return (
